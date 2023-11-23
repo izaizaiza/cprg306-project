@@ -1,27 +1,12 @@
 
-"use client"
 
-import { useState } from 'react';
 
-export default function SearchBar() {
+export default function SearchBar({ query,  handleSearch, handleSubmit}) {
     /**
      * create a search bar that allows users to search for art pieces
      */
 
-    // state variable to store the search query
-    const [query, setQuery] = useState('');
-
-    // function to handle the search change
-    const handleSearch = (e) => {
-        setQuery(e.target.value);
-    }
-
-    // function to handle the search submission
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(query);
-    }
-
+    
 
     return(
         <div
@@ -53,3 +38,6 @@ export default function SearchBar() {
         </div>
     )
 }
+
+//note: the search bar is not functional yet. It is just a UI component for now.
+// could be replaced with a search bar component from a UI library like Tailwind UI or Material UI

@@ -9,8 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.8.7",
+    "apollo-client": "^2.6.10",
+    "graphql": "^15.8.0",
+    "lodash": "^4.17.21",
     "next": "14.0.1",
     "react": "^18",
+    "react-bootstrap": "^2.9.1",
     "react-dom": "^18"
   },
   "devDependencies": {

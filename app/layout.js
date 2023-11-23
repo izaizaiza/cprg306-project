@@ -5,7 +5,7 @@ import NavBar from './features/nav-bar'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Art Ensemble Hub',
+  title: 'Art Roam',
   description: 'Bringing art pieces from different museums together in one place',
 }
 

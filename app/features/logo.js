@@ -10,7 +10,7 @@ export default function Logo() {
                 className="text-custom-milano-red
                             text-4xl"
                 > 
-                    AEH 
+                    Art Roam
                 </h1>
             </Link>
         </div>

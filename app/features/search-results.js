@@ -39,7 +39,7 @@ export default function SearchResults({ results, loading }) {
       {results.map((art) => (
         <Col key={art.id} xs={12} sm={6} md={4} lg={3}>
           <Card className="mb-4">
-            <Card.Img variant="top" src={imgURL(art.image_id,400)} alt={art.thumbnail?.alt_text} />
+            <Card.Img variant="top" src={imgURL(art.image_id)} alt={art.thumbnail?.alt_text} />
             <Card.Body>
               <Card.Title>{art.title}</Card.Title>
               <Card.Text>{art.artist_title}</Card.Text>

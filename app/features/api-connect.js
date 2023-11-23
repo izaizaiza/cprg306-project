@@ -51,8 +51,8 @@ export const searchData = async (query, ...fields) => {
  * @returns 
  */
 //function to get the image of the art piece
-export const imgURL = (id, width= 600) =>
-`https://www.artic.edu/iiif/2/${id}/full/!${width},/0/default.jpg`;
+export const imgURL = (id, width=250) =>
+`https://www.artic.edu/iiif/2/${id}/full/${width},/0/default.jpg`;
 
 
 

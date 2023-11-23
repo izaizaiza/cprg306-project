@@ -13,7 +13,7 @@ export default function LandingPage() {
     
     const [query, setQuery] = useState(""); // state variable to store the search query
     
-    const [results, setResults] = useState(null); // state variable to store the search results
+    const [results, setResults] = useState([]); // state variable to store the search results
     
     const [loading, setLoading] = useState(false); // state variable to store the loading status
     
@@ -45,7 +45,7 @@ export default function LandingPage() {
         searchData(query,['id', 'title', 'artist_title', 'image_id'])
             .then((data) => {
                 if(data && data.data){
-                    setResults(data.data);
+                    setResults([...data.data]);
                 }
             })
             .catch((error) => {
@@ -55,6 +55,9 @@ export default function LandingPage() {
                 setLoading(false);
             });
     }, [query])
+
+    // add results from harvard art museum api
+    // turn results into a list? then add from there?
 
     
 

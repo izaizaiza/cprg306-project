@@ -5,7 +5,7 @@ import { throttle } from 'lodash';
 
 // Throttle function to limit the number of API calls
 // https://lodash.com/docs/4.17.15#throttle
-const json = throttle(async (endpoint) => {
+const chicago_json = throttle(async (endpoint) => {
     //api url
     const url = `https://api.artic.edu/api/v1/${endpoint}`;
     console.log('api request url:', url);
@@ -21,25 +21,27 @@ const json = throttle(async (endpoint) => {
         return data;
 
     } catch(error){
-        console.error('API request error: ', error);
+        console.error('Chicago Art Museum API request error: ', error);
         throw error;
     }
 }, 1000); //limit to 1 call per second
+
+
 
 /**
  * 
  * @param {*} query 
  * @param  {...any} fields 
  */
-//function to search for art pieces
-export const searchData = async (query, ...fields) => {
+//function to search for art pieces in Chicago Art Museum
+export const searchDataCAM = async (query, ...fields) => {
     let endpoint = `artworks/search?q=${query}`;
     //let endpoint2 = `/artworks/129884`;
     if(fields.length){
         endpoint += `&fields=${fields.join(',')}`; //join the fields with a comma
     }
     //call the throttle function
-    const response = json(endpoint);
+    const response = await chicago_json(endpoint);
     return response;
 }
 

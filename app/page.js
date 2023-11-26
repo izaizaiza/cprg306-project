@@ -4,8 +4,13 @@
 
 import { useState, useEffect, use } from 'react';
 import SearchBar from './features/search-bar';
-import SearchResults from "./features/search-results"
-import { searchData } from "./features/api-connect"
+
+import { searchDataCAM } from "./api/api-cam";
+import { searchDataHAM } from './api/api-ham';
+
+import {imgURLCAM} from './api/api-cam';
+import { imgURLHAM } from './api/api-ham';
+
 
 
 export default function LandingPage() {
@@ -13,7 +18,10 @@ export default function LandingPage() {
     
     const [query, setQuery] = useState(""); // state variable to store the search query
     
-    const [results, setResults] = useState([]); // state variable to store the search results
+    const [camResults, setCamResults] = useState([]); // state variable to store the search results from Chicago Art Museum
+    const [hamResults, setHamResults] = useState([]); // state variable to store the search results from Harvard Art Museum
+    
+    //const [results, setResults] = useState([]); // state variable to store the search results
     
     const [loading, setLoading] = useState(false); // state variable to store the loading status
     
@@ -33,7 +41,9 @@ export default function LandingPage() {
     // function run every time the query changes
     useEffect(() => {
         if(!(query || query.length)){
-            setResults(null);
+            setCamResults([]);
+            setHamResults([]);
+            //setResults([]);
             return; //exit the function
         }
         if(query.length < 3){
@@ -42,10 +52,10 @@ export default function LandingPage() {
 
         // searching...
         setLoading(true);
-        searchData(query,['id', 'title', 'artist_title', 'image_id'])
+        searchDataCAM(query,['id', 'title', 'artist_title', 'image_id'])
             .then((data) => {
                 if(data && data.data){
-                    setResults([...data.data]);
+                    setCamResults([...data.data]);
                 }
             })
             .catch((error) => {
@@ -54,7 +64,29 @@ export default function LandingPage() {
             .finally(() => {
                 setLoading(false);
             });
-    }, [query])
+        
+        searchDataHAM(query)
+            .then((data) => {
+                if(data && data.records){
+                    setHamResults([...data.records]);
+                    
+                }
+            })
+            .catch((error) => {
+                setError(error);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+        
+        // combine the results from both museums
+        //setResults([...camResults, ...hamResults]);
+
+
+    }, [query]);
+
+
+    // another 
 
     // add results from harvard art museum api
     // turn results into a list? then add from there?
@@ -69,7 +101,30 @@ export default function LandingPage() {
             handleSearch={handleSearch}
             handleSubmit={handleSubmit}
             />
-            <SearchResults results={results} loading={loading}/>
+            <div>
+                <h2>Chicago Art Museum</h2>
+                <ul>
+                {camResults.map((art) => (
+                    <li key={art.id}>
+                        <h3>{art.title}</h3>
+                        <img src={imgURLCAM(art.image_id,400)} alt={art.title} />
+                    </li>
+                ))}
+                </ul>                
+            </div>
+
+            <div>
+                <h2>Harvard Art Museum</h2>
+                <ul>
+                {hamResults.map((art) => (
+                    <li key={art.id}>
+                        <h3>{art.title}</h3>
+                        <img src={art.primaryimageurl} alt={art.title} />
+                    </li>
+                    
+                ))}
+                </ul>
+            </div>
             
         </div>
     )

@@ -3,7 +3,8 @@
 "use client"
 import React from 'react';
 import {Row, Col, Card, Spinner} from 'react-bootstrap';
-import {imgURL} from './api-connect';
+import {imgURLCAM} from '../api/api-cam';
+import { imgURLHAM } from '../api/api-ham';
 
 /**
  * search results component that displays the search results
@@ -39,7 +40,7 @@ export default function SearchResults({ results, loading }) {
       {results.map((art) => (
         <Col key={art.id} xs={12} sm={6} md={4} lg={3}>
           <Card className="mb-4">
-            <Card.Img variant="top" src={imgURL(art.image_id)} alt={art.thumbnail?.alt_text} />
+            <Card.Img variant="top" src={imgURLCAM(art.image_id)} alt={art.thumbnail?.alt_text} />
             <Card.Body>
               <Card.Title>{art.title}</Card.Title>
               <Card.Text>{art.artist_title}</Card.Text>

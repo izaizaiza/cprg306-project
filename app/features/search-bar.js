@@ -39,5 +39,5 @@ export default function SearchBar({ query,  handleSearch, handleSubmit}) {
     )
 }
 
-//note: the search bar is not functional yet. It is just a UI component for now.
+
 // could be replaced with a search bar component from a UI library like Tailwind UI or Material UI

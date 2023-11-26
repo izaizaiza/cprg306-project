@@ -1,16 +1,11 @@
-
-
-// api connection to harvard art museum api
-
-
 import { throttle } from 'lodash';
 
 
 // Throttle function to limit the number of API calls
 // https://lodash.com/docs/4.17.15#throttle
-const json = throttle(async (endpoint) => {
+const chicago_json = throttle(async (endpoint) => {
     //api url
-    const url = `https://api.harvardartmuseums.org/${endpoint}`;
+    const url = `https://api.artic.edu/api/v1/${endpoint}`;
     console.log('api request url:', url);
 
     try{
@@ -24,21 +19,28 @@ const json = throttle(async (endpoint) => {
         return data;
 
     } catch(error){
-        console.error('API request error: ', error);
+        console.error('Chicago Art Museum API request error: ', error);
         throw error;
     }
 }, 1000); //limit to 1 call per second
 
 
-//function to search for art pieces
-export const searchHAM = async (query, ...fields) => {
-    let endpoint = `object?q=${query}`;
-    
+
+/**
+ * 
+ * @param {*} query 
+ * @param  {...any} fields
+ * @returns the json data from the api
+ */
+//function to search for art pieces in Chicago Art Museum
+export const searchDataCAM = async (query, ...fields) => {
+    let endpoint = `artworks/search?q=${query}`;
+    //let endpoint2 = `/artworks/129884`;
     if(fields.length){
         endpoint += `&fields=${fields.join(',')}`; //join the fields with a comma
     }
     //call the throttle function
-    const response = json(endpoint+`&apikey=${AHM_API_KEY}`);
+    const response = chicago_json(endpoint);
     return response;
 }
 
@@ -50,12 +52,5 @@ export const searchHAM = async (query, ...fields) => {
  * @returns 
  */
 //function to get the image of the art piece
-export const imgURL = (id, width=250) =>
+export const imgURLCAM = (id, width=250) =>
 `https://www.artic.edu/iiif/2/${id}/full/${width},/0/default.jpg`;
-
-
-
-
-
-
-

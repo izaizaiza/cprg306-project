@@ -26,12 +26,12 @@ export default function SearchBar({ query,  handleSearch, handleSubmit}) {
                 onChange={handleSearch} />
                 <button 
                 type="submit"
-                className='text-custom-milano-red 
-                            bg-custom-black-pearl 
+                className=' bg-custom-pearl
+                            text-custom-black-pearl  
                             hover:bg-custom-blue-light
-                            p-1
-                            pl-2
-                            pr-2
+                            hover:text-custom-pearl
+                            font-bold
+                            p-2
                             rounded'
                 >Search</button>
             </form>

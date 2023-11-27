@@ -3,7 +3,7 @@
 "use client"
 
 import { useState, useEffect} from 'react';
-import { Row } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 import SearchBar from './features/search-bar';
 
@@ -98,26 +98,24 @@ export default function LandingPage() {
             handleSearch={handleSearch}
             handleSubmit={handleSubmit}
             />
-            <div>
+            <div className='auto-rows-auto'>
                 <h2>Chicago Art Museum</h2>
-                <Row>
-                    {camResults.map((art) => (
-                        <ArtPiece
-                            key={art.id}
-                            artID={art.id}
-                            imgURL={imgURLCAM(art.image_id)}
-                            altText={art.thumbnail?.alt_text}
-                            title={art.title}
-                            artist={art.artist_title}
-                        />
-                    ))}
-                </Row>
+                {camResults.map((art) => (
+                    <ArtPiece
+                        key={art.id}
+                        artID={art.id}
+                        imgURL={imgURLCAM(art.image_id)}
+                        altText={art.thumbnail?.alt_text}
+                        title={art.title}
+                        artist={art.artist_title}
+                        siteURL={art.url}
+                    />
+                ))}
                 
-
-
+                
             </div>
 
-            <div>
+            <div className='auto-rows-auto'>
                 <h2>Harvard Art Museum</h2>
                 {hamResults.map((art) => (  
                     <ArtPiece
@@ -127,6 +125,7 @@ export default function LandingPage() {
                         altText={art.title}
                         title={art.title}
                         artist={getArtistName(art)}
+                        siteURL={art.url}
                     />
                 ))}
             </div>

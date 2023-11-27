@@ -52,5 +52,5 @@ export const searchDataCAM = async (query, ...fields) => {
  * @returns 
  */
 //function to get the image of the art piece
-export const imgURLCAM = (id, width=250) =>
-`https://www.artic.edu/iiif/2/${id}/full/${width},/0/default.jpg`;
+export const imgURLCAM = (id) =>
+`https://www.artic.edu/iiif/2/${id}/full/250,/0/default.jpg`; //the 400 is width

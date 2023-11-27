@@ -44,9 +44,16 @@ export const searchDataHAM = async (query) => {
  * @returns 
  */
 //function to get the image of the art piece
-export const imgURLHAM = (id, width=250) => {
+export const imgURLHAM = (url) => {
+    return `${url}/?width=250`;
+}
 
-    console.log('id:', id);
-    console.log('width:', width);
-    return `https://api.harvardartmuseums.org/image/${id}?q=width:${width}&apikey=${process.env.NEXT_PUBLIC_HAM_API_KEY}`;
+
+
+// helper function to get the artist's name
+export const getArtistName = (art) => {
+  if (art.people && art.people.length > 0) {
+    return art.people[0].name;
+  }
+  return 'Unknown artist';
 }

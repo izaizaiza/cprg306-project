@@ -2,14 +2,16 @@
 
 "use client"
 
-import { useState, useEffect, use } from 'react';
+import { useState, useEffect} from 'react';
+import { Row } from 'react-bootstrap';
+
 import SearchBar from './features/search-bar';
 
-import { searchDataCAM } from "./api/api-cam";
-import { searchDataHAM } from './api/api-ham';
+import { searchDataCAM, imgURLCAM } from "./api/api-cam";
+import { searchDataHAM, imgURLHAM, getArtistName } from './api/api-ham';
+import ArtPiece from './features/art-piece';
 
-import {imgURLCAM} from './api/api-cam';
-import { imgURLHAM } from './api/api-ham';
+
 
 
 
@@ -86,12 +88,7 @@ export default function LandingPage() {
     }, [query]);
 
 
-    // another 
 
-    // add results from harvard art museum api
-    // turn results into a list? then add from there?
-
-    
 
     return(
         <div>
@@ -103,27 +100,35 @@ export default function LandingPage() {
             />
             <div>
                 <h2>Chicago Art Museum</h2>
-                <ul>
-                {camResults.map((art) => (
-                    <li key={art.id}>
-                        <h3>{art.title}</h3>
-                        <img src={imgURLCAM(art.image_id,400)} alt={art.title} />
-                    </li>
-                ))}
-                </ul>                
+                <Row>
+                    {camResults.map((art) => (
+                        <ArtPiece
+                            key={art.id}
+                            artID={art.id}
+                            imgURL={imgURLCAM(art.image_id)}
+                            altText={art.thumbnail?.alt_text}
+                            title={art.title}
+                            artist={art.artist_title}
+                        />
+                    ))}
+                </Row>
+                
+
+
             </div>
 
             <div>
                 <h2>Harvard Art Museum</h2>
-                <ul>
-                {hamResults.map((art) => (
-                    <li key={art.id}>
-                        <h3>{art.title}</h3>
-                        <img src={art.primaryimageurl} alt={art.title} />
-                    </li>
-                    
+                {hamResults.map((art) => (  
+                    <ArtPiece
+                        key={art.id}
+                        artID={art.id}
+                        imgURL={imgURLHAM(art.primaryimageurl)}
+                        altText={art.title}
+                        title={art.title}
+                        artist={getArtistName(art)}
+                    />
                 ))}
-                </ul>
             </div>
             
         </div>

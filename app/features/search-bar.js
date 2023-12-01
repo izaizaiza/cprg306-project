@@ -13,20 +13,22 @@ export default function SearchBar({ query,  handleSearch, handleSubmit}) {
         className='bg-custom-black-pearl
                     rounded
                     items-center
-                    justify-between'
+                    justify-evenly
+                    mx-auto
+                    w-3/4'
                     >
             <form 
             onSubmit={handleSubmit}
-            className='flex w-full p-5 mt-10 mb-5 space-x-4'>
+            className='flex p-5 mt-10 mb-5 w-full justify-center'>
                 <input
-                className='text-custom-black-pearl w-3/4 rounded p-1' 
+                className='text-custom-black-pearl w-3/4 rounded p-1 mr-5' 
                 type="text"
                 placeholder="Search for art pieces..." 
                 value={query} 
                 onChange={handleSearch} />
                 <button 
                 type="submit"
-                className=' bg-custom-pearl
+                className=' bg-white
                             text-custom-black-pearl  
                             hover:bg-custom-blue-light
                             hover:text-custom-pearl

@@ -5,7 +5,7 @@ import React from 'react';
 
 const Filter = ({ handleFilterChange }) => {
   return (
-    <div className="mb-6">
+    <div className="w-3/4 mb-10 mx-auto p-5 text-center">
       <h3 className="text-lg font-semibold mb-2">Filter:</h3>
       <div className="mb-2">
         <input

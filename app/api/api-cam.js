@@ -53,7 +53,7 @@ export const searchDataCAM = async (query, ...fields) => {
  */
 //function to get the image of the art piece
 export const imgURLCAM = (id) =>
-`https://www.artic.edu/iiif/2/${id}/full/300,/0/default.jpg`; //the 400 is width
+`https://www.artic.edu/iiif/2/${id}/full/350,/0/default.jpg`; //the 400 is width
 
 
 

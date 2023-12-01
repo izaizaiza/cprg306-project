@@ -8,15 +8,17 @@ export default function ArtPiece({artID,imgURL, altText, title, artist, siteURL}
         <Col 
         key= {artID}
         className='bg-custom-black-pearl
+        w-2/3
         rounded
+        mx-auto
         items-center
         justify-between'>
             <Card className="m-3">
-                <Card.Img variant="top" src={imgURL} alt={altText} className="mx-auto"/>
-                <Card.Body className="text-center">
-                    <Card.Title>{title}</Card.Title>
-                    <Card.Text>{artist}</Card.Text>
-                    <Card.Body>
+                <Card.Img variant="top" src={imgURL} alt={altText} className="p-10 mx-auto"/>
+                <Card.Body className="pt-5 pb-10 text-center">
+                    <Card.Title className='text-2xl'>{title}</Card.Title>
+                    <Card.Text className='text-lg'>{artist}</Card.Text>
+                    <Card.Body className='hover:text-custom-milano-red'>
                         {siteURL? (
                             <Button 
                             variant="primary"

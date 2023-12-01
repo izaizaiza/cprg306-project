@@ -45,7 +45,7 @@ export const searchDataHAM = async (query) => {
  */
 //function to get the image of the art piece
 export const imgURLHAM = (url) => {
-    return `${url}/?width=300`;
+    return `${url}/?width=350`;
 }
 
 

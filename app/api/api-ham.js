@@ -45,7 +45,7 @@ export const searchDataHAM = async (query) => {
  */
 //function to get the image of the art piece
 export const imgURLHAM = (url) => {
-    return `${url}/?width=250`;
+    return `${url}/?width=300`;
 }
 
 
@@ -56,4 +56,17 @@ export const getArtistName = (art) => {
     return art.people[0].name;
   }
   return 'Unknown artist';
+}
+
+
+// function to get details of the art piece from Harvard by id
+export const getArtDetailsHAM = async (id) => {
+  try{
+    const response = await json(`object/${id}`);
+    return response;
+  }
+  catch(error){
+    console.error('Harvard Art Museum API request error: ', error);
+    throw error;
+  }
 }

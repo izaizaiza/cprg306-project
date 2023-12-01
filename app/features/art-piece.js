@@ -1,6 +1,9 @@
 
 import {Col, Card, Button} from 'react-bootstrap';
+import Link from 'next/link'
 export default function ArtPiece({artID,imgURL, altText, title, artist, siteURL}) {
+    
+    
     return(
         <Col 
         key= {artID}
@@ -13,9 +16,17 @@ export default function ArtPiece({artID,imgURL, altText, title, artist, siteURL}
                 <Card.Body className="text-center">
                     <Card.Title>{title}</Card.Title>
                     <Card.Text>{artist}</Card.Text>
-                    <Card.Link href={siteURL}>Url</Card.Link>
                     <Card.Body>
-                        <Button className="bg-custom-pearl rounded p-2 hover:bg-custom-blue-light hover:text-custom-pearl text-custom-black-pearl font-semibold " variant="primary">View Details</Button>
+                        {siteURL? (
+                            <Button 
+                            variant="primary"
+                            >
+                                <Card.Link href={siteURL} target="_blank">
+                                    View details
+                                </Card.Link>
+                            </Button>
+                        ) : null
+                        }
                     </Card.Body>
                     
                 </Card.Body>

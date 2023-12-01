@@ -53,4 +53,29 @@ export const searchDataCAM = async (query, ...fields) => {
  */
 //function to get the image of the art piece
 export const imgURLCAM = (id) =>
-`https://www.artic.edu/iiif/2/${id}/full/250,/0/default.jpg`; //the 400 is width
+`https://www.artic.edu/iiif/2/${id}/full/300,/0/default.jpg`; //the 400 is width
+
+
+
+
+// function to get art details by id from Chicago Art Museum
+export const getArtDetailsCAM = async (id) => {
+    //api url
+    const url = `https://api.artic.edu/api/v1/artworks/${id}`;
+    console.log('api request url:', url);
+
+    try{
+        //fetch data from api
+        const response = await fetch(url);
+        if(!response.ok){
+            throw new Error(`Fetch error. Error loading ${id} ($(response.status})`);
+        }
+        //convert response to json
+        const data = response.json();
+        return data;
+
+    } catch(error){
+        console.error('Chicago Art Museum API request error: ', error);
+        throw error;
+    }
+}

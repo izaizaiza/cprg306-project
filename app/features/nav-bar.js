@@ -14,7 +14,7 @@ export default function NavBar() {
                             bg-custom-black-pearl'>
                 <Link 
                 href="/favourites"
-                className='p-1'
+                className='p-2'
                 >Favourites</Link>
             </div>
             

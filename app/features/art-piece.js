@@ -8,9 +8,9 @@ export default function ArtPiece({artID,imgURL, altText, title, artist, siteURL}
         rounded
         items-center
         justify-between'>
-            <Card className="m-3 max-w-sm">
-                <Card.Img variant="top" src={imgURL} alt={altText} />
-                <Card.Body>
+            <Card className="m-3">
+                <Card.Img variant="top" src={imgURL} alt={altText} className="mx-auto"/>
+                <Card.Body className="text-center">
                     <Card.Title>{title}</Card.Title>
                     <Card.Text>{artist}</Card.Text>
                     <Card.Link href={siteURL}>Url</Card.Link>

@@ -80,10 +80,6 @@ export default function LandingPage() {
             .finally(() => {
                 setLoading(false);
             });
-        
-        // combine the results from both museums
-        //setResults([...camResults, ...hamResults]);
-
 
     }, [query]);
 
@@ -98,37 +94,40 @@ export default function LandingPage() {
             handleSearch={handleSearch}
             handleSubmit={handleSubmit}
             />
-            <div className='auto-rows-auto'>
-                <h2>Chicago Art Museum</h2>
-                {camResults.map((art) => (
-                    <ArtPiece
-                        key={art.id}
-                        artID={art.id}
-                        imgURL={imgURLCAM(art.image_id)}
-                        altText={art.thumbnail?.alt_text}
-                        title={art.title}
-                        artist={art.artist_title}
-                        siteURL={art.url}
-                    />
-                ))}
-                
-                
-            </div>
+            <Row className='auto-rows-auto items-center'>
+                <Col xs={12} sm={6} md={4} lang={3}>
+                    {/*<h2>Chicago Art Museum</h2>*/}
+                    {camResults.map((art) => (
+                        <ArtPiece
+                            key={art.id}
+                            artID={art.id}
+                            imgURL={imgURLCAM(art.image_id)}
+                            altText={art.thumbnail?.alt_text}
+                            title={art.title}
+                            artist={art.artist_title}
+                            siteURL={art.url}
+                        />
+                    ))}
+                </Col>    
+            </Row>
 
-            <div className='auto-rows-auto'>
-                <h2>Harvard Art Museum</h2>
-                {hamResults.map((art) => (  
-                    <ArtPiece
-                        key={art.id}
-                        artID={art.id}
-                        imgURL={imgURLHAM(art.primaryimageurl)}
-                        altText={art.title}
-                        title={art.title}
-                        artist={getArtistName(art)}
-                        siteURL={art.url}
-                    />
-                ))}
-            </div>
+            <Row className='auto-rows-auto'>
+                <Col xs={12} sm={6} md={4} lang={3}>
+                    {/*<h2>Harvard Art Museum</h2>*/}
+                    {hamResults.map((art) => (  
+                        <ArtPiece
+                            key={art.id}
+                            artID={art.id}
+                            imgURL={imgURLHAM(art.primaryimageurl)}
+                            altText={art.title}
+                            title={art.title}
+                            artist={getArtistName(art)}
+                            siteURL={art.url}
+                        />
+                    ))}
+                </Col>
+                
+            </Row>
             
         </div>
     )

@@ -59,87 +59,39 @@ export default function LandingPage() {
 
     // function run every time the query changes and the filter changes
     useEffect(() => {
-        if(!(query || query.length)){
-            setCamResults([]);
-            setHamResults([]);
-            return; //exit the function
+        if (!(query || query.length)) {
+          setCamResults([]);
+          setHamResults([]);
+          setLoading(false);
+          return; // exit the function
         }
-        if(query.length < 3){
-            return; //exit the function
+        if (query.length < 3) {
+          return; // exit the function
         }
-
+      
         // searching...
         setLoading(true);
-
-        // get results
-        if (showChicago && !showHarvard){
-            searchDataCAM(query,['id', 'title', 'artist_title', 'image_id', 'web_url'])
-                .then((data) => {
-                    if(data && data.data){
-                        setCamResults([...data.data]);
-                    }
-                })
-                .catch((error) => {
-                    setError(error);
-                })
-                .finally(() => {
-                    setLoading(false);
-                });
-        }
-        
-        if (showHarvard && !showChicago){
-            searchDataHAM(query)
-                .then((data) => {
-                    if(data && data.records){
-                        setHamResults([...data.records]);
-                        
-                    }
-                })
-                .catch((error) => {
-                    setError(error);
-                })
-                .finally(() => {
-                    setLoading(false);
-                });
-        }
-
-        if (!showChicago && !showHarvard){
+      
+        Promise.all([
+          // Fetch data from Chicago if the checkbox is checked
+          showChicago ? searchDataCAM(query, ['id', 'title', 'artist_title', 'image_id', 'web_url']) : null,
+          // Fetch data from Harvard if the checkbox is checked
+          showHarvard ? searchDataHAM(query) : null
+        ])
+          .then(([camData, hamData]) => {
+            const camResults = camData && camData.data ? [...camData.data] : [];
+            const hamResults = hamData && hamData.records ? [...hamData.records] : [];
+      
+            setCamResults(camResults);
+            setHamResults(hamResults);
+          })
+          .catch((error) => {
+            setError(error);
+          })
+          .finally(() => {
             setLoading(false);
-        }
-    }, [query, showChicago, showHarvard]); //end of useEffect
-
-    // another useEffect to run when the filter changes to check both checkboxes
-    useEffect(() => {
-        if (showChicago && showHarvard){
-            searchDataCAM(query,['id', 'title', 'artist_title', 'image_id', 'web_url'])
-                .then((data) => {
-                    if(data && data.data){
-                        setCamResults([...data.data]);
-                    }
-                })
-                .catch((error) => {
-                    setError(error);
-                })
-                .finally(() => {
-                    setLoading(false);
-                });
-
-            searchDataHAM(query)
-            .then((data) => {
-                if(data && data.records){
-                    setHamResults([...data.records]);
-                    
-                }
-            })
-            .catch((error) => {
-                setError(error);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
-        }
-    }, [query,showChicago, showHarvard]);
-
+          });
+      }, [query, showChicago, showHarvard]);
 
     return(
         <div>

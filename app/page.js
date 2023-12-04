@@ -2,7 +2,7 @@
 
 "use client"
 
-import { useState, useEffect, use} from 'react';
+import { useState, useEffect} from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 import Headline from './features/headline';

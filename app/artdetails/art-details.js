@@ -1,7 +1,7 @@
 
 
 import { Col,Row,Card } from "react-bootstrap"
-
+import React from 'react';
 
 export default function ArtDetails({imgURL, altText, title, artist, description, siteURL}) {
     return(

@@ -1,4 +1,4 @@
-
+import React from 'react';
 import {Col, Card, Button} from 'react-bootstrap';
 import Link from 'next/link'
 export default function ArtPiece({artID,imgURL, altText, title, artist, siteURL}) {

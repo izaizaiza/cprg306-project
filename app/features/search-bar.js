@@ -17,16 +17,18 @@ export default function SearchBar({ query,  handleSearch, handleSubmit}) {
                     mx-auto
                     w-3/4'
                     >
+            <p className='text-lg pt-5 pb-2 pl-5 pr-5 text-custom-pearl text-center'>
+                Search for art pieces from the Chicago Art Museum and Harvard Art Museum</p>
             <form 
             onSubmit={handleSubmit}
-            className='flex p-5 mt-10 mb-5 w-full justify-center'>
+            className='flex p-5 mb-5 w-full justify-center'>
                 <input
                 className='text-custom-black-pearl w-3/4 rounded p-1 mr-5' 
                 type="text"
                 placeholder="Search for art pieces..." 
                 value={query} 
                 onChange={handleSearch} />
-                <button 
+                {/*<button 
                 type="submit"
                 className=' bg-white
                             text-custom-black-pearl  
@@ -35,7 +37,7 @@ export default function SearchBar({ query,  handleSearch, handleSubmit}) {
                             font-bold
                             p-2
                             rounded'
-                >Search</button>
+                >Search</button>*/}
             </form>
         </div>
     )

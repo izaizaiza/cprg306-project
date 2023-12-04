@@ -5,6 +5,8 @@
 import { useState, useEffect, use} from 'react';
 import { Row, Col } from 'react-bootstrap';
 
+import Headline from './features/headline';
+
 import SearchBar from './features/search-bar';
 
 import { searchDataCAM, imgURLCAM } from "./api/api-cam";
@@ -12,6 +14,7 @@ import { searchDataHAM, imgURLHAM, getArtistName } from './api/api-ham';
 import ArtPiece from './features/art-piece';
 
 import Filter from './features/filter';
+import { set } from 'lodash';
 
 
 
@@ -32,8 +35,11 @@ export default function LandingPage() {
     const [error, setError] = useState(null); // state variable to store the error
 
     // state variable to store the filter status
-    const [showChicago, setShowChicago] = useState(false);
+    const [showChicago, setShowChicago] = useState(true); // default to true
     const [showHarvard, setShowHarvard] = useState(false);
+
+    // state variable to store the sort status
+    const [sortOption, setSortOption] = useState('default'); // default to empty string
 
 
     // function to handle the search change
@@ -54,6 +60,11 @@ export default function LandingPage() {
         if(filter === 'harvard'){
             setShowHarvard(checked);
         }
+    }
+
+    // function to handle the sort change
+    const handleSortChange = (sort) => {
+        setSortOption(sort);
     }
     
 
@@ -81,9 +92,10 @@ export default function LandingPage() {
           .then(([camData, hamData]) => {
             const camResults = camData && camData.data ? [...camData.data] : [];
             const hamResults = hamData && hamData.records ? [...hamData.records] : [];
-      
-            setCamResults(camResults);
-            setHamResults(hamResults);
+
+            // sorting results based on selected option
+            setCamResults(sortResults(camResults, sortOption));
+            setHamResults(sortResults(hamResults, sortOption));
           })
           .catch((error) => {
             setError(error);
@@ -91,17 +103,43 @@ export default function LandingPage() {
           .finally(() => {
             setLoading(false);
           });
-      }, [query, showChicago, showHarvard]);
+
+        
+        
+      }, [query, showChicago, showHarvard, sortOption]);
+    
+    // function to sort results based on selected option
+    const sortResults = (results, sortOption) => {
+        if(sortOption === 'title'){
+            return results.sort((a, b) => a.title.localeCompare(b.title));
+        }
+        else if(sortOption === 'artist'){
+            return results.sort((a, b) => {
+                // recall that the artist_title field is only available for Chicago Art Museum
+                // and for Harvard Art Museum, we need to extract the artist name from the people field 
+                // using the getArtistName function
+                const artistA = a.artist_title || getArtistName(a);
+                const artistB = b.artist_title || getArtistName(b);
+                return artistA.localeCompare(artistB);
+            });
+        }
+        else{
+            return results; // return the results as is
+        }
+    }
 
     return(
         <div>
+            <Headline />
 
             <SearchBar
             query={query}
             handleSearch={handleSearch}
             handleSubmit={handleSubmit}
             />
-            <Filter handleFilterChange={handleFilterChange} />
+            <Filter 
+            handleFilterChange={handleFilterChange} 
+            handleSortChange={handleSortChange}/>
             <Row className='auto-rows-auto items-center'>
                 {showChicago && (
                     <Col xs={12} sm={6} md={4} lang={3}>

@@ -1,6 +1,6 @@
 
 
-export default function RandomArtPage() {
+export default function Page() {
     return(
         <div>
             <h1> Random Art Page </h1>

@@ -1,7 +1,7 @@
 
 
 
-export default function FavouritesPage() { 
+export default function Page() { 
     return(
         <div>
             <h1> Favourites Page </h1>

@@ -1,3 +1,7 @@
+/**
+ * @description: This is the page for the explore page
+ */
+
 
 "use client"
 

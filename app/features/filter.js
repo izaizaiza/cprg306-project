@@ -26,7 +26,7 @@ const Filter = ({ handleFilterChange, handleSortChange }) => {
         />
         <label htmlFor="harvardFilter" className="text-sm">Harvard Art Museum</label>
       </div>
-      
+
       <Sort handleSortChange={handleSortChange} />
     </div>
   );

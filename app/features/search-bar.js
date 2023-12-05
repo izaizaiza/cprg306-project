@@ -10,19 +10,19 @@ export default function SearchBar({ query,  handleSearch, handleSubmit}) {
 
     return(
         <div
-        className='bg-custom-black-pearl
-                    rounded
+        className=' rounded
                     items-center
                     justify-evenly
                     mx-auto
                     w-3/4'
                     >
-            <p className='text-lg pt-5 pb-2 pl-5 pr-5 text-custom-pearl text-center'>
+            <p className='text-lg pt-5 pb-2 pl-5 pr-5 text-custom-neon-blue text-center'>
                 Search for art pieces from the Chicago Art Museum and Harvard Art Museum</p>
             <form 
             onSubmit={handleSubmit}
             className='flex p-5 mb-5 w-full justify-center'>
                 <input
+                id = "searchBar"
                 className='text-custom-black-pearl w-3/4 rounded p-1 mr-5' 
                 type="text"
                 placeholder="Search for art pieces..." 

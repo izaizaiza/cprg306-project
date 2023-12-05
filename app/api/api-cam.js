@@ -72,6 +72,7 @@ export const getArtDetailsCAM = async (id) => {
         }
         //convert response to json
         const data = response.json();
+        console.log('art details:', data);
         return data;
 
     } catch(error){

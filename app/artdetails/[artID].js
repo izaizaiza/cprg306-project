@@ -3,7 +3,7 @@
 /**
  * Art Details
  */
-// Path: app/artdetails/[artID].js
+// Path: app/artdetails/page.js
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { getArtDetailsCAM } from '../../api/api-cam';
@@ -11,6 +11,9 @@ import { getArtDetailsCAM } from '../../api/api-cam';
 const ArtDetails = () => {
     const router = useRouter();
     const { artID } = router.query;
+
+    // console
+    console.log('id:', id);
     const [artDetails, setArtDetails] = useState(null);
 
     useEffect(() => {

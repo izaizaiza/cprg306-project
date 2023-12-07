@@ -8,9 +8,11 @@ export default function ArtPiece({artID,imgURL, altText, title, artist, siteURL}
         <Col 
         key= {artID}
         className='w-2/3 rounded mx-auto items-center justify-between'>
-            <Link href="/artdetails/[artID]" as={`/artdetails/${artID}`}>
+            <Link 
+            href={`/artdetails/${artID}`}
+            target="_blank">
                 <Card className="m-3">
-                    <Card.Img variant="top" src={imgURL} alt={altText} className="p-10 mx-auto"/>
+                    <Card.Img variant="top" src={imgURL} alt={altText} className="mx-auto border-4 border-custom-pearl hover:border-custom-pink"/>
                     <Card.Body className="pt-5 pb-10 text-center">
                         <Card.Title className='text-2xl'>{title}</Card.Title>
                         <Card.Text className='text-lg'>{artist}</Card.Text>

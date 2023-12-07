@@ -27,6 +27,7 @@ export default function LandingPage() {
     
     const [camResults, setCamResults] = useState([]); // state variable to store the search results from Chicago Art Museum
     const [hamResults, setHamResults] = useState([]); // state variable to store the search results from Harvard Art Museum
+    const [mergedResults, setMergedResults] = useState([]); // state variable to store the search results from both museums
     
     //const [results, setResults] = useState([]); // state variable to store the search results
     
@@ -87,15 +88,18 @@ export default function LandingPage() {
           // Fetch data from Chicago if the checkbox is checked
           showChicago ? searchDataCAM(query, ['id', 'title', 'artist_title', 'image_id', 'web_url']) : null,
           // Fetch data from Harvard if the checkbox is checked
-          showHarvard ? searchDataHAM(query) : null
+          showHarvard ? searchDataHAM(query) : null,
         ])
           .then(([camData, hamData]) => {
-            const camResults = camData && camData.data ? [...camData.data] : [];
-            const hamResults = hamData && hamData.records ? [...hamData.records] : [];
+            const camResults = camData && camData.data ? camData.data.map((art) => ({...art, source:'CAM'})) : [];
+            const hamResults = hamData && hamData.records ? hamData.records.map((art) => ({...art, source:'HAM'})) : [];
+            // set the results from both museums
+            const allResults = [...camResults, ...hamResults];
 
             // sorting results based on selected option
             setCamResults(sortResults(camResults, sortOption));
             setHamResults(sortResults(hamResults, sortOption));
+            setMergedResults(sortResults(allResults, sortOption));
           })
           .catch((error) => {
             setError(error);
@@ -135,17 +139,21 @@ export default function LandingPage() {
             <SearchBar
             query={query}
             handleSearch={handleSearch}
-            handleSubmit={handleSubmit}
-            />
+            handleSubmit={handleSubmit}/>
+
             <Filter 
             handleFilterChange={handleFilterChange} 
             handleSortChange={handleSortChange}/>
-            <Row className='auto-rows-auto items-center'>
-                {showChicago && (
-                    <Col xs={12} sm={6} md={4} lang={3}>
-                        {/*<h2>Chicago Art Museum</h2>*/}
-                        {camResults.map((art) => (
+
+
+            <Row className='auto-rows-auto'>
+                <h2>From both</h2>
+                    
+                {mergedResults.map((art) => (
+                    <Col key={art.id} xs={12} sm={6} md={4} lang={3}>
+                        {art.source == 'CAM' && (
                             <ArtPiece
+                                source = {art.source}
                                 key={art.id}
                                 artID={art.id}
                                 imgURL={imgURLCAM(art.image_id)}
@@ -153,29 +161,26 @@ export default function LandingPage() {
                                 title={art.title}
                                 artist={art.artist_title}
                                 siteURL={art.url}
+                            />    
+                        )}
+                        {art.source == 'HAM' && (
+                            <ArtPiece
+                                source = {art.source}
+                                key={art.id}
+                                artID={art.id}
+                                imgURL={imgURLHAM(art.primaryimageurl)}
+                                altText={art.title}
+                                title={art.title}
+                                artist={getArtistName(art)}
+                                siteURL={art.url}
                             />
-                        ))}
-                    </Col>    
-                )}
+                        )}
+                    </Col>
+                ))}     
             </Row>
 
-            <Row className='auto-rows-auto'>
-                <Col xs={12} sm={6} md={4} lang={3}>
-                    {/*<h2>Harvard Art Museum</h2>*/}
-                    {hamResults.map((art) => (  
-                        <ArtPiece
-                            key={art.id}
-                            artID={art.id}
-                            imgURL={imgURLHAM(art.primaryimageurl)}
-                            altText={art.title}
-                            title={art.title}
-                            artist={getArtistName(art)}
-                            siteURL={art.url}
-                        />
-                    ))}
-                </Col>
-                
-            </Row>
+
+
             
         </div>
     )

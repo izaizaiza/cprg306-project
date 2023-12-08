@@ -12,11 +12,13 @@ export default function ArtPiece({artID,imgURL, altText, title, artist, siteURL}
             href={`/artdetails/${artID}`}
             target="_blank">
                 <Card className="m-3">
-                    <Card.Img variant="top" src={imgURL} alt={altText} className="mx-auto border-4 border-custom-pearl hover:border-custom-pink"/>
+                    <Card.Img variant="top" src={imgURL} alt={altText} className="mx-auto rounded-lg border-4 border-custom-pearl hover:border-custom-pink"/>
                     <Card.Body className="pt-5 pb-10 text-center">
                         <Card.Title className='text-2xl'>{title}</Card.Title>
                         <Card.Text className='text-lg'>{artist}</Card.Text>
-                        <Button variant="primary" href={siteURL}>Learn More</Button>
+                        {/*<Link className='text-custom-neon-blue hover:text-custom-pink'  
+                        href={siteURL} 
+                        target='_blank'>Learn More</Link>*/}
                     </Card.Body>
                 </Card>
             </Link>

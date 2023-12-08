@@ -11,7 +11,7 @@ import { getArtDetailsCAM, imgURLCAM } from '../../api/api-cam';
 
 export default function ArtDetails({ params }) {
     // console
-    console.log('params:', params.from);
+    console.log('params:', params.source);
     console.log('artID:', params.artID);
     const [artDetails, setArtDetails] = useState([]);
 
@@ -24,7 +24,7 @@ export default function ArtDetails({ params }) {
         };
 
         fetchData();
-    }, [params.artID, params.from]);
+    }, [params.artID, params.source]);
 
     console.log('art details:', artDetails);
         

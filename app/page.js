@@ -157,7 +157,6 @@ export default function LandingPage() {
                                 altText={art.thumbnail?.alt_text}
                                 title={art.title}
                                 artist={art.artist_title}
-                                siteURL={art.url}
                             />    
                         )}
                         {art.source == 'HAM' && (
@@ -169,7 +168,6 @@ export default function LandingPage() {
                                 altText={art.title}
                                 title={art.title}
                                 artist={getArtistName(art)}
-                                siteURL={art.url}
                             />
                         )}
                     </Col>

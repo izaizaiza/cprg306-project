@@ -9,9 +9,8 @@ export default function NavBar() {
            <Logo className='flex justify-self-center'/> 
             <div className='flex items-center 
                             rounded
-                            text-custom-milano-red
-                            hover:text-custom-pearl
-                            bg-custom-black-pearl'>
+                            text-custom-pink
+                            hover:text-custom-pearl'>
                 <Link 
                 href="/favourites"
                 className='p-2'

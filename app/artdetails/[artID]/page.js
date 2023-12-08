@@ -2,7 +2,7 @@
 // Path: app/artdetails/[artID]/page.js
 
 /**
- * Art Details
+ * Art Details page for art pieces from the Chicago Art Museum
  */
 "use client"
 import { useRouter } from 'next/navigation';

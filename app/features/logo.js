@@ -7,8 +7,9 @@ export default function Logo() {
         <div>
             <Link href="/">
                 <h1
-                className="text-custom-milano-red
-                            text-4xl"
+                className="text-custom-pink
+                            text-4xl
+                            hover:text-custom-pearl"
                 > 
                     Art Roam
                 </h1>

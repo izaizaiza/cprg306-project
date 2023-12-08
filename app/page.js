@@ -14,7 +14,6 @@ import { searchDataHAM, imgURLHAM, getArtistName } from './api/api-ham';
 import ArtPiece from './features/art-piece';
 
 import Filter from './features/filter';
-import { set } from 'lodash';
 
 
 
@@ -147,8 +146,6 @@ export default function LandingPage() {
 
 
             <Row className='auto-rows-auto'>
-                <h2>From both</h2>
-                    
                 {mergedResults.map((art) => (
                     <Col key={art.id} xs={12} sm={6} md={4} lang={3}>
                         {art.source == 'CAM' && (

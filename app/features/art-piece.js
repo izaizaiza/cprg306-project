@@ -1,7 +1,17 @@
 import React from 'react';
 import {Col, Card, Button} from 'react-bootstrap';
 import Link from 'next/link'
-export default function ArtPiece({artID,imgURL, altText, title, artist, siteURL}) {
+export default function ArtPiece({source, artID, imgURL, altText, title, artist}) {
+    let artDetailsURL= null;
+    if (source == 'CAM'){
+        artDetailsURL = `/artdetails/${artID}`;
+    }
+    else if (source == 'HAM'){
+        artDetailsURL = `/artdetailsHAM/${artID}`;
+    }
+    else{
+        artDetailsURL = null;
+    }
     
     
     return(
@@ -9,16 +19,13 @@ export default function ArtPiece({artID,imgURL, altText, title, artist, siteURL}
         key= {artID}
         className='w-2/3 rounded mx-auto items-center justify-between'>
             <Link 
-            href={`/artdetails/${artID}`}
+            href={artDetailsURL}
             target="_blank">
                 <Card className="m-3">
                     <Card.Img variant="top" src={imgURL} alt={altText} className="mx-auto rounded-lg border-4 border-custom-pearl hover:border-custom-pink"/>
                     <Card.Body className="pt-5 pb-10 text-center">
                         <Card.Title className='text-2xl'>{title}</Card.Title>
                         <Card.Text className='text-lg'>{artist}</Card.Text>
-                        {/*<Link className='text-custom-neon-blue hover:text-custom-pink'  
-                        href={siteURL} 
-                        target='_blank'>Learn More</Link>*/}
                     </Card.Body>
                 </Card>
             </Link>

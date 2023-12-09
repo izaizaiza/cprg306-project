@@ -12,9 +12,9 @@ export default function NavBar() {
                             text-custom-pink
                             hover:text-custom-pearl'>
                 <Link 
-                href="/favourites"
+                href="/collections"
                 className='p-2'
-                >Favourites</Link>
+                >Collections</Link>
             </div>
             
         </nav>

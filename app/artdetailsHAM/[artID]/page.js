@@ -40,7 +40,7 @@ export default function ArtDetails({ params }) {
                 {artDetails.title}
             </h1>
 
-            <img 
+            <Image
             className='w-full h-fit'
             src={imgURLHAM(artDetails.primaryimageurl)} 
             alt={artDetails.title} />

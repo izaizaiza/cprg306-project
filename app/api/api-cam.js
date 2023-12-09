@@ -33,12 +33,15 @@ const chicago_json = throttle(async (endpoint) => {
  * @returns the json data from the api
  */
 //function to search for art pieces in Chicago Art Museum
-export const searchDataCAM = async (query, ...fields) => {
-    let endpoint = `artworks/search?q=${query}`;
+const fields = ['id', 'title', 'artist_title', 'image_id', 'web_url'];
+export const searchDataCAM = async (query) => {
+    let endpoint = `artworks/search?q=${query}&fields=${fields.join(',')}`;
+
     //let endpoint2 = `/artworks/129884`;
-    if(fields.length){
-        endpoint += `&fields=${fields.join(',')}`; //join the fields with a comma
-    }
+    //if(fields.length){
+    //    endpoint += `&fields=${fields.join(',')}`; //join the fields with a comma
+    //}
+    
     //call the throttle function
     const response = chicago_json(endpoint);
     return response;

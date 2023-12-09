@@ -5,28 +5,31 @@
  * Art Details page for art pieces from the Chicago Art Museum
  */
 "use client"
-import { useRouter } from 'next/navigation';
+//import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { getArtDetailsCAM, imgURLCAM } from '../../api/api-cam';
+import { getArtDetailsHAM, getArtistName, imgURLHAM } from '../../api/api-ham';
+import Link from 'next/link';
+
 
 export default function ArtDetails({ params }) {
     // console
-    console.log('params:', params.source);
+    
     console.log('artID:', params.artID);
     const [artDetails, setArtDetails] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             // Fetch art details based on artID from the API
-            const data = await getArtDetailsCAM(params.artID);
-            console.log('art details:', data);
-            setArtDetails(data.data);
+            const data = await getArtDetailsHAM(params.artID);
+            console.log('data.records:', data.records);
+            setArtDetails(data.records[0]);
         };
 
         fetchData();
-    }, [params.artID, params.source]);
+    }, [params.artID]);
 
     console.log('art details:', artDetails);
+    console.log('art url:', artDetails.url);
         
     // Render the art details using the fetched data
     return (
@@ -39,11 +42,23 @@ export default function ArtDetails({ params }) {
 
             <img 
             className='w-full h-fit'
-            src={imgURLCAM(artDetails.image_id)} 
-            alt={artDetails.thumbnail?.alt_text} />
-            <p>Artist: {artDetails.artist_title}</p>
-            <p>Artwork type: {artDetails.artwork_type_title}</p>
-            <p>Medium: {artDetails.medium_display}</p>
+            src={imgURLHAM(artDetails.primaryimageurl)} 
+            alt={artDetails.title} />
+            <section
+            className='flex-col pt-10 text-center space-y-2'>
+                <p>Artist: {getArtistName(artDetails)}</p>
+                <p>Artwork type: {artDetails.classification ? artDetails.classification : artDetails.division}</p>
+                <p>Medium: {artDetails.medium ? artDetails.medium : artDetails.technique}</p>
+                <a
+                href={artDetails.url}
+                target = '_blank'>
+                    <p className='text-custom-pink hover:text-custom-pearl'>
+                        Learn more
+                    </p>
+                    
+                </a>
+            </section>
+            
             {/* Render other details as needed */}
         </div>
     );

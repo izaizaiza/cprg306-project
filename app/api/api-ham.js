@@ -62,7 +62,8 @@ export const getArtistName = (art) => {
 // function to get details of the art piece from Harvard by id
 export const getArtDetailsHAM = async (id) => {
   try{
-    const response = await json(`object/${id}`);
+    const response = await json(`object?q=${id}`);
+    console.log(response);
     return response;
   }
   catch(error){

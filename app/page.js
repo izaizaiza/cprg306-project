@@ -85,7 +85,7 @@ export default function LandingPage() {
       
         Promise.all([
           // Fetch data from Chicago if the checkbox is checked
-          showChicago ? searchDataCAM(query, ['id', 'title', 'artist_title', 'image_id', 'web_url']) : null,
+          showChicago ? searchDataCAM(query) : null,
           // Fetch data from Harvard if the checkbox is checked
           showHarvard ? searchDataHAM(query) : null,
         ])

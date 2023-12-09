@@ -1,6 +1,6 @@
 import React from 'react';
 import {Col, Card, Button} from 'react-bootstrap';
-import Link from 'next/link'
+import Link from 'next/link';
 export default function ArtPiece({source, artID, imgURL, altText, title, artist}) {
     let artDetailsURL= null;
     if (source == 'CAM'){

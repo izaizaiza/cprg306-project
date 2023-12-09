@@ -5,13 +5,16 @@
  * Art Details page for art pieces from the Chicago Art Museum
  */
 "use client"
-import { useRouter } from 'next/navigation';
+
 import { useEffect, useState } from 'react';
-import { getArtDetailsCAM, imgURLCAM } from '../../api/api-cam';
+import { imgURLCAM } from '../../api/api-cam';
+import { getArtDetailsCAM } from '../../api/api-cam';
+
+
 
 export default function ArtDetails({ params }) {
     // console
-    console.log('params:', params.source);
+    
     console.log('artID:', params.artID);
     const [artDetails, setArtDetails] = useState([]);
 
@@ -24,7 +27,11 @@ export default function ArtDetails({ params }) {
         };
 
         fetchData();
-    }, [params.artID, params.source]);
+    }, [params.artID]);
+    
+    
+    // get artdetails from camResults by the artID
+
 
     console.log('art details:', artDetails);
         
@@ -41,9 +48,12 @@ export default function ArtDetails({ params }) {
             className='w-full h-fit'
             src={imgURLCAM(artDetails.image_id)} 
             alt={artDetails.thumbnail?.alt_text} />
-            <p>Artist: {artDetails.artist_title}</p>
-            <p>Artwork type: {artDetails.artwork_type_title}</p>
-            <p>Medium: {artDetails.medium_display}</p>
+            <section
+            className='flex-col pt-10 text-center space-y-2'>
+                <p>Artist: {artDetails.artist_title}</p>
+                <p>Artwork type: {artDetails.artwork_type_title}</p>
+                <p>Medium: {artDetails.medium_display}</p>
+            </section>
             {/* Render other details as needed */}
         </div>
     );

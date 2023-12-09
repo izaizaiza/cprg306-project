@@ -44,10 +44,11 @@ export default function ArtDetails({ params }) {
                 {artDetails.title}
             </h1>
 
-            <Image 
+            <img
             className='w-full h-fit'
             src={imgURLCAM(artDetails.image_id)} 
-            alt={artDetails.thumbnail?.alt_text} />
+            alt={artDetails.thumbnail?.alt_text}
+            img/>
             <section
             className='flex-col pt-10 text-center space-y-2'>
                 <p>Artist: {artDetails.artist_title}</p>

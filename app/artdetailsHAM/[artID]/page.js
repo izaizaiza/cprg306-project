@@ -8,7 +8,7 @@
 //import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { getArtDetailsHAM, getArtistName, imgURLHAM } from '../../api/api-ham';
-import Link from 'next/link';
+
 
 
 export default function ArtDetails({ params }) {
@@ -40,7 +40,7 @@ export default function ArtDetails({ params }) {
                 {artDetails.title}
             </h1>
 
-            <Image
+            <img
             className='w-full h-fit'
             src={imgURLHAM(artDetails.primaryimageurl)} 
             alt={artDetails.title} />

@@ -44,6 +44,10 @@ export default function Page() {
             handleFilterChange={handleFilterChange} 
             handleSortChange={handleSortChange}/>
 
+            <p
+            className='text-center pb-10'>
+                Click on the image to view in a different tab
+            </p>
 
             <Row className='auto-rows-auto'>
                 {mergedResults.map((art) => (

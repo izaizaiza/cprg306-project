@@ -42,7 +42,7 @@ export default function ArtPiece({source, artID, imgURL, altText, title, artist,
     return(
         <Col 
         key= {artID}
-        className='w-2/3 rounded mx-auto items-center justify-between'>
+        className='w-2/3 rounded mx-auto d-flex flex-column align-items-center justify-content-center'>
 
             <Link 
             href={artDetailsURL}
@@ -58,9 +58,9 @@ export default function ArtPiece({source, artID, imgURL, altText, title, artist,
             
             {/*Conditionally render the Add to Collection button based on showAddButton*/}
             {showAddButton &&(
-                <Button 
+                <Button
                 variant="primary" 
-                className="bg-custom-pearl text-custom-neon-blue font-bold py-2 px-4 rounded hover:text-custom-pearl hover:bg-custom-pink" 
+                className="bg-custom-pearl text-custom-neon-blue font-bold text-sm py-2 px-2 rounded hover:text-custom-pearl hover:bg-custom-pink" 
                 onClick={handleAddToCollection}>
                     Add to Collection
                 </Button>
@@ -71,7 +71,7 @@ export default function ArtPiece({source, artID, imgURL, altText, title, artist,
             {showRemoveButton &&(
                 <Button 
                 variant="primary" 
-                className="bg-custom-pearl text-custom-neon-blue font-bold py-2 px-4 rounded hover:text-custom-pearl hover:bg-custom-pink" 
+                className="bg-custom-pearl text-custom-neon-blue font-bold text-sm py-2 px-4 rounded hover:text-custom-pearl hover:bg-custom-pink" 
                 onClick={handleRemoveFromCollection}>
                     Remove from Collection
                 </Button>

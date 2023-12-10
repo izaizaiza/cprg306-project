@@ -6,7 +6,7 @@
 
 
 import React from 'react';
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 import ArtPiece from '../../features/art-piece';
 import { useArtContext } from '../../features/art-context';
 
@@ -16,11 +16,13 @@ export default function Page(){
 
 
     return (
-        <div>
-            <h2>Collections</h2>
-            <Row>
+        <Container>
+            <h2 className='text-center text-4xl font-bold m-20'>Collections</h2>
+            <Row xs={1} md={2} lg={3} className='g-4'>
                 {collection.map((art) => (
-                    <Col key={art.artID} xs={12} md={4}>
+                    <Col 
+                    key={art.artID}
+                    className='mb-10'>
                         {/* Use ArtPiece without Add to Collection button */}
                         <ArtPiece
                             source={art.source}
@@ -35,7 +37,7 @@ export default function Page(){
                     </Col>
                 ))}
             </Row>
-        </div>
+        </Container>
         
     );
 };

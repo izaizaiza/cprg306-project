@@ -31,6 +31,18 @@ export const ArtProvider = ({ children }) => {
     
     const [collection, setCollection] = useState([]); // default to empty array
     
+    const addToCollection = (artPiece) => {
+        console.log('add to collection:', artPiece);
+        setCollection((prevCollection) => [...prevCollection, artPiece]);
+        console.log(collection);
+    }
+
+    const removeFromCollection = (artID) => {
+        console.log('remove from collection:', artID);
+        setCollection((prevCollection) => 
+        prevCollection.filter((artPiece) => artPiece.artID !== artID));
+    };
+
     const handleSearch = (e) => {
         setQuery(e.target.value);
     };
@@ -62,31 +74,31 @@ export const ArtProvider = ({ children }) => {
         setLoading(false);
         return;
         }
-    setLoading(true);
+        setLoading(true);
 
-    Promise.all([
-        // Fetch data from Chicago if the checkbox is checked
-        showChicago ? searchDataCAM(query) : null,
-        // Fetch data from Harvard if the checkbox is checked
-        showHarvard ? searchDataHAM(query) : null,
-      ])
-        .then(([camData, hamData]) => {
-          const camResults = camData && camData.data ? camData.data.map((art) => ({...art, source:'CAM'})) : [];
-          const hamResults = hamData && hamData.records ? hamData.records.map((art) => ({...art, source:'HAM'})) : [];
-          // set the results from both museums
-          const allResults = [...camResults, ...hamResults];
+        Promise.all([
+            // Fetch data from Chicago if the checkbox is checked
+            showChicago ? searchDataCAM(query) : null,
+            // Fetch data from Harvard if the checkbox is checked
+            showHarvard ? searchDataHAM(query) : null,
+        ])
+            .then(([camData, hamData]) => {
+            const camResults = camData && camData.data ? camData.data.map((art) => ({...art, source:'CAM'})) : [];
+            const hamResults = hamData && hamData.records ? hamData.records.map((art) => ({...art, source:'HAM'})) : [];
+            // set the results from both museums
+            const allResults = [...camResults, ...hamResults];
 
-          // sorting results based on selected option
-          setCamResults(sortResults(camResults, sortOption));
-          setHamResults(sortResults(hamResults, sortOption));
-          setMergedResults(sortResults(allResults, sortOption));
-        })
-        .catch((error) => {
-          setError(error);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+            // sorting results based on selected option
+            setCamResults(sortResults(camResults, sortOption));
+            setHamResults(sortResults(hamResults, sortOption));
+            setMergedResults(sortResults(allResults, sortOption));
+            })
+            .catch((error) => {
+            setError(error);
+            })
+            .finally(() => {
+            setLoading(false);
+            });
 
       
       
@@ -120,7 +132,10 @@ export const ArtProvider = ({ children }) => {
         sortOption,
         showChicago,
         showHarvard,
+        collection,
         setCollection,
+        addToCollection,
+        removeFromCollection,
         handleSearch,
         handleSubmit,
         handleSortChange,

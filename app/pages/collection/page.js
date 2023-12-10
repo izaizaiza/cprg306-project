@@ -2,17 +2,21 @@
 /**
  * holds collection of art pieces to be rendered in collection page
  */
+"use client"
 
+import { ArtProvider, useArtContext } from '../../features/art-context';
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import ArtPiece from './art-piece';
+import ArtPiece from '../../features/art-piece';
 
-const Collection = ({collection}) => {
 
-    
+export default function Page(){
+    const { collection } = useArtContext();
     console.log(collection);
+
     return (
         <Container>
+            <ArtProvider>
             <h2>Collections</h2>
             <Row>
                 {collection.map((art) => (
@@ -30,10 +34,8 @@ const Collection = ({collection}) => {
                     </Col>
                 ))}
             </Row>
+            </ArtProvider>
         </Container>
     );
 };
-
-export default Collection;
-
 

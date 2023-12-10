@@ -7,8 +7,8 @@
 "use client"
 
 import { useEffect, useState } from 'react';
-import { imgURLCAM } from '../../api/api-cam';
-import { getArtDetailsCAM } from '../../api/api-cam';
+import { imgURLCAM } from '../../../api/api-cam';
+import { getArtDetailsCAM } from '../../../api/api-cam';
 
 
 

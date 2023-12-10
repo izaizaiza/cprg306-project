@@ -7,7 +7,7 @@
 "use client"
 //import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { getArtDetailsHAM, getArtistName, imgURLHAM } from '../../api/api-ham';
+import { getArtDetailsHAM, getArtistName, imgURLHAM } from '../../../api/api-ham';
 
 
 

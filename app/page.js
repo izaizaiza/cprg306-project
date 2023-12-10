@@ -4,33 +4,24 @@
 
 "use client"
 
-import { useState, useEffect} from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 import Headline from './features/headline';
 
 import SearchBar from './features/search-bar';
 
-//import { searchDataCAM, imgURLCAM } from "./api/api-cam";
-//import { searchDataHAM, imgURLHAM, getArtistName } from './api/api-ham';
 import { imgURLCAM } from "./api/api-cam";
 import { imgURLHAM, getArtistName } from './api/api-ham';
 import ArtPiece from './features/art-piece';
 
 import Filter from './features/filter';
-import { useArtContext } from './features/art-context';
+import { ArtProvider, useArtContext } from './features/art-context';
 
-export default function LandingPage() {
+export default function Page() {
 
     const {
         query,
         mergedResults,
-        loading,
-        error,
-        sortOption,
-        showChicago,
-        showHarvard,
-        setCollection,
         handleSearch,
         handleSubmit,
         handleSortChange,
@@ -38,7 +29,7 @@ export default function LandingPage() {
     } = useArtContext();
 
     return(
-        
+        <ArtProvider> 
         <div>
             <Headline />
 
@@ -64,7 +55,6 @@ export default function LandingPage() {
                                 altText={art.thumbnail?.alt_text}
                                 title={art.title}
                                 artist={art.artist_title}
-                                setCollection={setCollection}  // pass the setCollection function to ArtPiece
                                 showAddButton={true} // show the Add to Collection button
                             />    
                         )}
@@ -78,7 +68,6 @@ export default function LandingPage() {
                                 altText={art.title}
                                 title={art.title}
                                 artist={getArtistName(art)}
-                                setCollection={setCollection}  // pass the setCollection function to ArtPiece
                                 showAddButton={true} // show the Add to Collection button
                             />
                         )}
@@ -86,6 +75,7 @@ export default function LandingPage() {
                 ))}     
             </Row>
         </div>
+        </ArtProvider>
         
     )
 }

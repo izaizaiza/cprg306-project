@@ -4,7 +4,7 @@
 
 "use client"
 
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Button } from 'react-bootstrap';
 
 import Headline from './features/headline';
 
@@ -15,7 +15,7 @@ import { imgURLHAM, getArtistName } from './api/api-ham';
 import ArtPiece from './features/art-piece';
 
 import Filter from './features/filter';
-import { ArtProvider, useArtContext } from './features/art-context';
+import { useArtContext } from './features/art-context';
 
 export default function Page() {
 
@@ -26,10 +26,12 @@ export default function Page() {
         handleSubmit,
         handleSortChange,
         handleFilterChange,
+        collection,
     } = useArtContext();
 
+    console.log('collection at app/page: ',collection);
+
     return(
-        <ArtProvider> 
         <div>
             <Headline />
 
@@ -58,8 +60,9 @@ export default function Page() {
                                 showAddButton={true} // show the Add to Collection button
                             />    
                         )}
-                        {art.source == 'HAM' && (
 
+                        {art.source == 'HAM' && (
+                            
                             <ArtPiece
                                 source = {art.source}
                                 key={art.id}
@@ -74,8 +77,6 @@ export default function Page() {
                     </Col>
                 ))}     
             </Row>
-        </div>
-        </ArtProvider>
-        
+        </div> 
     )
 }

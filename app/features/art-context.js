@@ -32,7 +32,6 @@ export const ArtProvider = ({ children }) => {
     const [collection, setCollection] = useState([]); // default to empty array
     
     const addToCollection = (artPiece) => {
-        console.log('add to collection:', artPiece);
         setCollection((prevCollection) => [...prevCollection, artPiece]);
         console.log(collection);
     }
@@ -133,7 +132,6 @@ export const ArtProvider = ({ children }) => {
         showChicago,
         showHarvard,
         collection,
-        setCollection,
         addToCollection,
         removeFromCollection,
         handleSearch,

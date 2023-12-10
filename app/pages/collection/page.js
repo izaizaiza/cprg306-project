@@ -4,19 +4,18 @@
  */
 "use client"
 
-import { ArtProvider, useArtContext } from '../../features/art-context';
-import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-import ArtPiece from '../../features/art-piece';
 
+import React from 'react';
+import { Row, Col } from 'react-bootstrap';
+import ArtPiece from '../../features/art-piece';
+import { useArtContext } from '../../features/art-context';
 
 export default function Page(){
     const { collection } = useArtContext();
-    console.log(collection);
+    console.log('collection at collection/page: ',collection);
 
     return (
-        <Container>
-            <ArtProvider>
+        <div>
             <h2>Collections</h2>
             <Row>
                 {collection.map((art) => (
@@ -34,8 +33,8 @@ export default function Page(){
                     </Col>
                 ))}
             </Row>
-            </ArtProvider>
-        </Container>
+        </div>
+        
     );
 };
 

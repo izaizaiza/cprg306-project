@@ -21,12 +21,13 @@ export default function ArtPiece({source, artID, imgURL, altText, title, artist,
         artDetailsURL = null;
     }
 
-    const { addToCollection} = useArtContext();
+    const { collection, addToCollection } = useArtContext();
     // event handler for adding art piece to collection
     const handleAddToCollection = () => {
-        console.log('add to collection:', {source, artID, imgURL, altText, title, artist});
+        
         if (showAddButton){
             addToCollection({source, artID, imgURL, altText, title, artist});
+            console.log('collection at ArtPiece: ', collection);
             alert('Added to collection!');
         }
         
@@ -58,7 +59,7 @@ export default function ArtPiece({source, artID, imgURL, altText, title, artist,
                 onClick={handleAddToCollection}>
                     Add to Collection
                 </Button>
-
+                
             )}
 
         </Col>

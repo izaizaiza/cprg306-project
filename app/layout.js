@@ -2,7 +2,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import NavBar from './features/nav-bar'
 import { ArtProvider } from './features/art-context'
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'Art Roam',

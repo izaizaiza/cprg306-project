@@ -4,7 +4,7 @@
 
 "use client"
 
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 
 import Headline from './features/headline';
 
@@ -49,9 +49,10 @@ export default function Page() {
                 Click on the image to view in a different tab
             </p>
 
-            <Row className='auto-rows-auto'>
+            <Container>
+            <Row className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
                 {mergedResults.map((art) => (
-                    <Col key={art.id} xs={12} sm={6} md={4} lang={3}>
+                    <Col key={art.id}>
                         {art.source == 'CAM' && (
                             <ArtPiece
                                 source = {art.source}
@@ -83,6 +84,7 @@ export default function Page() {
                     </Col>
                 ))}     
             </Row>
+            </Container>
         </div> 
     )
 }

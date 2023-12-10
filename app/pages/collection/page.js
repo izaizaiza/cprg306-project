@@ -18,7 +18,7 @@ export default function Page(){
     return (
         <Container>
             <h2 className='text-center text-4xl font-bold m-20'>Collections</h2>
-            <Row xs={1} md={2} lg={3} className='g-4'>
+            <Row className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
                 {collection.map((art) => (
                     <Col 
                     key={art.artID}
@@ -34,7 +34,11 @@ export default function Page(){
                             showAddButton={false}
                             showRemoveButton={true}
                         />
+
                     </Col>
+
+                    
+
                 ))}
             </Row>
         </Container>

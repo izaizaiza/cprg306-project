@@ -13,7 +13,7 @@ export default function NavBar() {
                             hover:text-custom-pearl'>
                 <Link 
                 href="/pages/collection"
-                className='p-2'
+                className='p-2 text-2xl italic underline'
                 >Collections</Link>
             </div>
             

@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 import { useArtContext } from './art-context';
 
-export default function ArtPiece({source, artID, imgURL, altText, title, artist, showAddButton}) {
+export default function ArtPiece({source, artID, imgURL, altText, title, artist, showAddButton, showRemoveButton}) {
 
    
     let artDetailsURL= null;
@@ -21,7 +21,7 @@ export default function ArtPiece({source, artID, imgURL, altText, title, artist,
         artDetailsURL = null;
     }
 
-    const { collection, addToCollection } = useArtContext();
+    const { collection, addToCollection, removeFromCollection } = useArtContext();
     // event handler for adding art piece to collection
     const handleAddToCollection = () => {
         
@@ -31,6 +31,11 @@ export default function ArtPiece({source, artID, imgURL, altText, title, artist,
             alert('Added to collection!');
         }
         
+    }
+
+    const handleRemoveFromCollection = () => {
+        console.log('remove from collection the id: ', artID);
+        removeFromCollection(artID);
     }
     
     
@@ -61,6 +66,18 @@ export default function ArtPiece({source, artID, imgURL, altText, title, artist,
                 </Button>
                 
             )}
+
+            {/*Conditionally render the Add to Collection button based on showAddButton*/}
+            {showRemoveButton &&(
+                <Button 
+                variant="primary" 
+                className="bg-custom-pearl text-custom-neon-blue font-bold py-2 px-4 rounded hover:text-custom-pearl hover:bg-custom-pink" 
+                onClick={handleRemoveFromCollection}>
+                    Remove from Collection
+                </Button>
+                
+            )}
+
 
         </Col>
     )

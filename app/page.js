@@ -58,6 +58,7 @@ export default function Page() {
                                 title={art.title}
                                 artist={art.artist_title}
                                 showAddButton={true} // show the Add to Collection button
+                                showRemoveButton={false}
                             />    
                         )}
 
@@ -72,6 +73,7 @@ export default function Page() {
                                 title={art.title}
                                 artist={getArtistName(art)}
                                 showAddButton={true} // show the Add to Collection button
+                                showRemoveButton={false}
                             />
                         )}
                     </Col>

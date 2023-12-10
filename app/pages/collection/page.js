@@ -6,13 +6,14 @@
 
 
 import React from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Button } from 'react-bootstrap';
 import ArtPiece from '../../features/art-piece';
 import { useArtContext } from '../../features/art-context';
 
 export default function Page(){
     const { collection } = useArtContext();
     console.log('collection at collection/page: ',collection);
+
 
     return (
         <div>
@@ -29,6 +30,7 @@ export default function Page(){
                             title={art.title}
                             artist={art.artist}
                             showAddButton={false}
+                            showRemoveButton={true}
                         />
                     </Col>
                 ))}

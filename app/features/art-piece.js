@@ -1,7 +1,11 @@
+
+
 import React from 'react';
-import {Col, Card, Button} from 'react-bootstrap';
+import {Col, Card} from 'react-bootstrap';
 import Link from 'next/link';
-export default function ArtPiece({source, artID, imgURL, altText, title, artist}) {
+import AddToCollectionButton from './add-to-collection';
+
+export default function ArtPiece({source, artID, imgURL, altText, title, artist, setCollection, showAddButton}) {
     let artDetailsURL= null;
     if (source == 'CAM'){
         artDetailsURL = `/artdetails/${artID}`;
@@ -12,12 +16,33 @@ export default function ArtPiece({source, artID, imgURL, altText, title, artist}
     else{
         artDetailsURL = null;
     }
+
+    // event handler for adding art piece to collection
+    const handleAddToCollection = () => {
+        console.log('add to collection:', {source, artID, imgURL, altText, title, artist});
+        // add item to collection\
+        if (showAddButton){
+            setCollection((prevCollection) => [
+                ...prevCollection, 
+                {source, artID, imgURL, altText, title, artist}]);
+            alert('Added to collection!');
+        }
+        
+    }
     
     
     return(
         <Col 
         key= {artID}
         className='w-2/3 rounded mx-auto items-center justify-between'>
+            {/*Conditionally render the Add to Collection button based on showAddButton*/}
+            {showAddButton &&(
+                <AddToCollectionButton
+                item={{ source, artID, imgURL, altText, title, artist }}
+                onClick={handleAddToCollection}
+                ></AddToCollectionButton>
+            )}
+            
             <Link 
             href={artDetailsURL}
             target="_blank">
